@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>くま談</h1>
+  <form method=post>
+    <dl>
+      <dt>相談:
+      <dd>
+        <input 
+            type=text
+            name=input
+            value="{{request.form.input }}">
+    </dl>
+    <p><input type=submit value=送信>
+  </form>
+  {% if msg %}
+    <p> {{msg}}</p>
+  {% endif %}
+  {% if number %}
+    <p> {{number}}</p>
+  {% endif %}
+{% endblock %}
