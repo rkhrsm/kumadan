@@ -48,8 +48,13 @@ def get_number(message:str):
             number = numbers[result]
         else:
             number = "0120279338"   # よりそいホットライン
-        # print(f"number = {number}")
+        print(result)
 
+script = {
+    "#7119":"病気やケガに関する悩みは救急安心センター事業 #7119 に相談できます。",
+    "#9110":"犯罪や事故に関する悩みは警察相談専用電話 #9110 に相談できます。",
+    "188":"消費生活に関する悩みは消費者ホットライン 118 に相談できます。",
+}
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
@@ -61,5 +66,9 @@ def main():
             t2.start()
             t1.join()
             t2.join()
-            return render_template('main.html', msg=encourage_msg, number=number)
+            if number in script:
+                answer = script[number]
+            else:
+                answer = "生活に関する悩みはよりそいホットラインに相談できます。"
+            return render_template('main.html', msg=encourage_msg, number=number, script=answer)
     return render_template('main.html')
