@@ -1,5 +1,6 @@
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for,send_from_directory
 import threading
+from gtts import gTTS
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -11,7 +12,7 @@ client = OpenAI(api_key="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")
 def encourage(message:str):
     global encourage_msg
     prompt1 = [
-        {"role": "user", "content": message+"。2文くらいで励ましてください"},
+        {"role": "user", "content": message+"。30字くらいで励ましてください"},
     ]
     res = client.chat.completions.create(
         model = "gpt-3.5-turbo",  # GPTのエンジン名を指定します
@@ -70,5 +71,14 @@ def main():
                 answer = script[number]
             else:
                 answer = "生活に関する悩みはよりそいホットラインに相談できます。"
+            tts1 = gTTS(text = encourage_msg+answer+number+ "に電話をかけますか？", lang='ja')
+            tts1.save('sound/message.mp3')
             return render_template('main.html', msg=encourage_msg, number=number, script=answer)
     return render_template('main.html')
+
+@app.route("/sound/<path:filename>")
+def play(filename):
+    if filename == "intro":
+        return send_from_directory("sound", "intro.mp3")
+    if filename == "message":
+        return send_from_directory("sound", "message.mp3")

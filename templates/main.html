@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
+  {% if not msg %}
+    <audio src="sound/intro" autoplay="autoplay" controls></audio>
+  {% endif %}
   <h1>くま談</h1>
   <form method=post>
     <dl>
@@ -21,5 +24,6 @@
   {% endif %}
   {% if number %}
     <p> <a href="tel:{{number}}">{{number}}</a> に電話をかけますか？</p>
+    <audio src="sound/message" autoplay="autoplay" ></audio>
   {% endif %}
 {% endblock %}
