@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
-  {% if not msg %}
-    <audio src="sound/intro" autoplay="autoplay" controls></audio>
-  {% endif %}
   <h1>くま談</h1>
+  <a href="/">リセット</a>
   <form method=post>
     <dl>
       <dt>相談:
@@ -16,6 +14,9 @@
     </dl>
     <p><input type=submit value=送信>
   </form>
+  {% if not msg %}
+    <audio src="sound/intro" autoplay="autoplay" controls></audio>
+  {% endif %}
   {% if msg %}
     <p> {{msg}}</p>
   {% endif %}
