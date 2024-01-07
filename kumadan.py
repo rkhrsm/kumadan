@@ -71,7 +71,7 @@ def main():
                 answer = script[number]
             else:
                 answer = "生活に関する悩みはよりそいホットラインに相談できます。"
-            tts1 = gTTS(text = encourage_msg+answer+number+ "に電話をかけますか？", lang='ja')
+            tts1 = gTTS(text = encourage_msg+answer+number+ "に電話をかけますか？", lang='ja', slow=True)
             tts1.save('sound/message.mp3')
             return render_template('main.html', msg=encourage_msg, number=number, script=answer)
     return render_template('main.html')
