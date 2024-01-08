@@ -71,10 +71,15 @@ def main():
                 answer = script[number]
             else:
                 answer = "生活に関する悩みはよりそいホットラインに相談できます。"
-            tts1 = gTTS(text = encourage_msg+answer+number+ "に電話をかけますか？", lang='ja', slow=True)
+            tts1 = gTTS(text = encourage_msg+answer+number+ 
+                        "に電話をかけますか？かける場合はボタンを押してください。", lang='ja', slow=True)
             tts1.save('sound/message.mp3')
             return render_template('main.html', msg=encourage_msg, number=number, script=answer)
     return render_template('main.html')
+
+@app.route('/tel')
+def tel():
+    return render_template('tel.html')
 
 @app.route("/sound/<path:filename>")
 def play(filename):
@@ -82,3 +87,5 @@ def play(filename):
         return send_from_directory("sound", "intro.mp3")
     if filename == "message":
         return send_from_directory("sound", "message.mp3")
+    if filename == "tel":
+        return send_from_directory("sound", "tel.mp3")
