@@ -29,12 +29,13 @@ def encourage(message:str):
 
 
 def get_number(message:str):
-    numbers = {"1":"#7119", "2":"#9110", "3":"188"}
+    numbers = {"1":"#7119", "2":"#9110", "3":"188", "4":"177"}
     global number
     prompt2 = [
         {"role": "user", "content": message},
         {"role": "user", "content":'今の相談が体や健康に関する相談の場合は"1"、'
-        '犯罪に関する相談の場合は"2"、消費者トラブルに関する質問の場合は"3"と答えよ。それ以外の場合は"0"と答えよ'},
+        '犯罪に関する相談の場合は"2"、消費者トラブルに関する相談の場合は"3"、'
+        '天気に関する相談の場合は"4"と答えよ。それ以外の場合は"0"と答えよ'},
     ]
     res = client.chat.completions.create(
         model = "gpt-3.5-turbo",  # GPTのエンジン名を指定します
@@ -55,6 +56,7 @@ script = {
     "#7119":"病気やケガに関する悩みは救急安心センター事業 #7119 に相談できます。",
     "#9110":"犯罪や事故に関する悩みは警察相談専用電話 #9110 に相談できます。",
     "188":"消費生活に関する悩みは消費者ホットライン 188 に相談できます。",
+    "177":"明後日までの天気は天気予報電話サービス 177 で聞くことができます。"
 }
 
 @app.route('/', methods=['GET', 'POST'])
@@ -71,7 +73,9 @@ def main():
                 answer = script[number]
             else:
                 answer = "生活に関する悩みはよりそいホットラインに相談できます。"
-            tts1 = gTTS(text = encourage_msg+answer+number+ 
+            if number == "177":
+                encourage_msg = ""
+            tts1 = gTTS(text = encourage_msg + answer + number + 
                         "に電話をかけますか？かける場合はボタンを押してください。", lang='ja', slow=True)
             tts1.save('sound/message.mp3')
             return render_template('main.html', msg=encourage_msg, number=number, script=answer)
