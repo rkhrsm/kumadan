@@ -1,0 +1,15 @@
+.input-group {
+    width: 80%;
+    padding: auto;
+    margin: auto;
+
+    .input-group-btn {
+        width: auto;
+    }
+}
+
+.card {
+    width: 80%;
+    padding: auto;
+    margin: auto;
+}
