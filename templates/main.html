@@ -17,7 +17,7 @@
     </div>
   </form>
 
-  {% if not msg %}
+  {% if not number %}
   <div style="margin: 0 auto; display: table;">
     <audio src="sound/intro" autoplay="autoplay" controls></audio>
   </div>
@@ -40,6 +40,7 @@
         <div style="margin: 0 auto; display: table;">
           <audio src="sound/message" autoplay="autoplay" ></audio></p>
         </div>
+        <a href="/tel">電話をかける</a>
       {% endif %}
     </div>
   </div>
