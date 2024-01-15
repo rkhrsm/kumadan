@@ -26,18 +26,11 @@
   <div class="card mb3">
     <div class="card-header">出力結果</div>
     <div class="card-body">
-      {% if msg %}
-        <p class="card-text">{{msg}}</p>
-      {% endif %}
-      {% if script %}
-        <p class="card-text">{{script}}</p>
-      {% endif %}
       {% if number %}
-        <p class="card-text"> <a href="tel:{{number}}">{{number}}</a> に電話をかけますか？</p>
+        <h1 class="display-1 card-text text-center"> <a href="tel:電話番号いれてね">{{number}}</a></h1>
         <div style="margin: 0 auto; display: table;">
           <audio src="sound/message" autoplay="autoplay" ></audio></p>
         </div>
-        <a href="/tel">電話をかける</a>
       {% endif %}
     </div>
   </div>

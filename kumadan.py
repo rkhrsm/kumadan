@@ -6,7 +6,7 @@ from gtts import gTTS
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="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")
 # message = "おなかが痛い"
 
 
