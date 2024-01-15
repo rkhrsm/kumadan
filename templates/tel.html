@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h1>くま談</h1>
+  <br>
+  <br>
+  
+  <p class="h1 text-center fw-bold text-info">くま談</p>
   <a href="/">リセット</a>
-  <p>電話をかけました</p>
-  <audio src="sound/tel" autoplay="autoplay" ></audio>
+  
+  <div class="card mb3">
+    <div class="card-header">電話番号: {{number}}</div>
+    <div class="card-body">
+      <p class="h1 text-center fw-bold">電話をかけました</p>
+      <div style="margin: 0 auto; display: table;">
+        <audio src="sound/tel" autoplay="autoplay" controls></audio>
+      </div>
+    </div>
+  </div>
 {% endblock %}
