@@ -1,31 +1,44 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h1>くま談</h1>
+  <br>
+  <br>
+
+  <p class="h1 text-center fw-bold text-info">くま談</p>
   <a href="/">リセット</a>
   <form method=post>
-    <dl>
-      <dt>相談:
-      <dd>
-        <input 
-            type=text
-            name=input
-            value="{{request.form.input }}"
-        >
-    </dl>
-    <p><input type=submit value=送信>
+    <div class="input-group mb-3 input-group-lg">
+      <label class="input-group-text" for="inputGroupSelect01">相談</label>
+      <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name=input
+      value="{{request.form.input }}">
+      <button class="btn btn-outline-secondary" type="submit" id="button-addon1" value="送信">送信</button>
+    </div>
   </form>
+
   {% if not number %}
+  <div style="margin: 0 auto; display: table;">
     <audio src="sound/intro" autoplay="autoplay" controls></audio>
+  </div>
   {% endif %}
-  {% if msg %}
-    <p> {{msg}}</p>
-  {% endif %}
-  {% if script %}
-    <p> {{script}}</p>
-  {% endif %}
-  {% if number %}
-    <p> <a href="tel:{{number}}">{{number}}</a> に電話をかけますか？</p>
-    <audio src="sound/message" autoplay="autoplay" ></audio>
-    <a href="/tel">電話をかける</a>
-  {% endif %}
+
+  <br>
+  <br>
+  
+  <div class="card mb3">
+    <div class="card-header">出力結果</div>
+    <div class="card-body">
+      {% if msg %}
+        <p class="card-text">{{msg}}</p>
+      {% endif %}
+      {% if script %}
+        <p class="card-text">{{script}}</p>
+      {% endif %}
+      {% if number %}
+        <p class="card-text"> <a href="tel:{{number}}">{{number}}</a> に電話をかけますか？</p>
+        <div style="margin: 0 auto; display: table;">
+          <audio src="sound/message" autoplay="autoplay" ></audio></p>
+        </div>
+        <a href="/tel">電話をかける</a>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
