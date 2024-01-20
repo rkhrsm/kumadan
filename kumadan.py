@@ -1,5 +1,5 @@
 from openai import OpenAI
-from flask import Flask, flash, redirect, render_template, request, url_for, send_from_directory
+from flask import Flask, render_template, request, send_from_directory
 import threading
 from gtts import gTTS
 
@@ -66,6 +66,7 @@ script = {
 def main():
     if request.method == 'POST':
         if request.form['input']:
+            app.logger.info(f"相談：{request.form['input']}")
             t1 = threading.Thread(
                 target=get_number, args=(request.form['input'],))
             t2 = threading.Thread(
@@ -84,6 +85,7 @@ def main():
             tts1 = gTTS(text=encourage_msg + answer + number +
                         "に電話をかけますか？かける場合はボタンを押してください。", lang='ja', slow=True)
             tts1.save('sound/message.mp3')
+            app.logger.info(f"回答：{encourage_msg + number}")
             return render_template('main.html', msg=encourage_msg, number=number, script=answer)
     return render_template('main.html')
 
