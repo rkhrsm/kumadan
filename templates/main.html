@@ -29,7 +29,8 @@
       {% if number %}
         <h1 class="display-1 card-text text-center"> <a href="tel:電話番号いれてね">{{number}}</a></h1>
         <div style="margin: 0 auto; display: table;">
-          <audio src="sound/message" autoplay="autoplay" ></audio></p>
+            <!-- ファイル名をランダムにすることでキャッシュからの読み込みを防ぐ -->
+          <audio src="sound/message{{rand}}" autoplay="autoplay" ></audio></p>
         </div>
       {% endif %}
     </div>

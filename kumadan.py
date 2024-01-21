@@ -2,7 +2,7 @@ from openai import OpenAI
 from flask import Flask, render_template, request, send_from_directory
 import threading
 from gtts import gTTS
-
+from random import randint
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
@@ -18,7 +18,7 @@ def encourage(message: str):
     res = client.chat.completions.create(
         model="gpt-3.5-turbo",  # GPTのエンジン名を指定します
         messages=prompt1,  # type: ignore
-        max_tokens=200,  # 生成するトークンの最大数
+        max_tokens=100,  # 生成するトークンの最大数
         n=1,  # 生成するレスポンスの数
         temperature=0.5,  # 生成時のランダム性の制御
     )
@@ -84,7 +84,8 @@ def main():
                         "に電話をかけますか？かける場合はボタンを押してください。", lang='ja', slow=True)
             tts1.save('sound/message.mp3')
             app.logger.info(f"回答：{encourage_msg + number}")
-            return render_template('main.html', msg=encourage_msg, number=number, script=answer)
+            return render_template('main.html', msg=encourage_msg,
+                                   number=number, script=answer, rand=randint(10,99))
     return render_template('main.html')
 
 
@@ -97,7 +98,7 @@ def tel():
 def play(filename):
     if filename == "intro":
         return send_from_directory("sound", "intro.mp3")
-    if filename == "message":
+    if "message" in filename:
         return send_from_directory("sound", "message.mp3")
     if filename == "tel":
         return send_from_directory("sound", "tel.mp3")
