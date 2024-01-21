@@ -50,7 +50,7 @@ def get_number(message: str):
         if result in numbers:
             number = numbers[result]
         else:
-            number = "0120279338"   # よりそいホットライン
+            number = "0120-279-338"   # よりそいホットライン
         print(result)
 
 
@@ -58,7 +58,8 @@ script = {
     "#7119": "病気やケガに関する悩みは救急安心センター事業 #7119 に相談できます。",
     "#9110": "犯罪や事故に関する悩みは警察相談専用電話 #9110 に相談できます。",
     "188": "消費生活に関する悩みは消費者ホットライン 188 に相談できます。",
-    "177": "明後日までの天気は天気予報電話サービス 177 で聞くことができます。"
+    "177": "明後日までの天気は天気予報電話サービス 177 で聞くことができます。",
+    "0120-279-338": "生活に関する悩みはよりそいホットラインに相談できます。"
 }
 
 
@@ -75,10 +76,7 @@ def main():
             t2.start()
             t1.join()
             t2.join()
-            if number in script:
-                answer = script[number]
-            else:
-                answer = "生活に関する悩みはよりそいホットラインに相談できます。"
+            answer = script[number]
             if number == "177":
                 global encourage_msg
                 encourage_msg = ""
